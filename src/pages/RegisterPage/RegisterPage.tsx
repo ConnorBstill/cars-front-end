@@ -28,8 +28,6 @@ const RegisterPage = () => {
     } else {
       alert('Error registering')
     }
-
-    // console.log(data)
   }
 
   return (
