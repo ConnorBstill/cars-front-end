@@ -41,3 +41,18 @@ export const deleteCar = async (carId: any) => {
 
   return data;
 }
+
+export const updateCar = async(body: any) => {
+  const response = await fetch(`${API_URL}/car`, {
+    method: 'PUT',
+    headers: { 
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getJwt()}`
+    },
+    body: JSON.stringify(body)
+  });
+
+  const data = await response.json();
+
+  return data;
+}

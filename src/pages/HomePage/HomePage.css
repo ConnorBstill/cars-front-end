@@ -9,6 +9,20 @@
   justify-content: center;
 }
 
+.car-list-item-labels {
+  margin-right: 10px;
+}
+
 .car-list-item-field {
   width: 50%;
+}
+
+.car-list-item-inner-container {
+  width: 200px;
+}
+
+.car-list-item-edit {
+  width: 50%;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
