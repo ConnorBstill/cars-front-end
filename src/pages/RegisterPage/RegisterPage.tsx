@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 import { register } from '../../ApiServices/AuthService';
+import { setUser } from '../../ApiServices/UserService';
 
 import './RegisterPage.css';
 
 const RegisterPage = () => {
-  const [username, setUserName] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUserName] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [userIsAdmin, setUserIsAdmin] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -20,14 +22,20 @@ const RegisterPage = () => {
   }
 
   const handleRegisterClick = async () => {
-    const { jwt, success } = await register({ username, password });
+    const { jwt, success } = await register({ username, password, userIsAdmin });
 
     if (success) {
       localStorage.setItem('car-app-jwt', jwt);
+      setUser(jwt);
       navigate('/home');
     } else {
-      alert('Error registering')
+      alert('Error registering');
     }
+  }
+
+  const handleCheckboxClick = (event: any) => {
+    console.log(event);
+    setUserIsAdmin(event.target.value);
   }
 
   return (
@@ -45,6 +53,11 @@ const RegisterPage = () => {
           className='password-input' 
           placeholder='Password'
           type='password' />
+
+        <div className='checkbox-container'>
+          <label>Are you registering as a teacher?</label>
+          <input type='checkbox' onChange={(e) => handleCheckboxClick(e)} />
+        </div>
 
         <button className='register-button' onClick={() => handleRegisterClick()}>Register</button>
 

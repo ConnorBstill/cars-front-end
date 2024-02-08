@@ -1,6 +1,12 @@
 import { API_URL } from '../environment';
 
-export const register = async (body: any) => {
+interface AuthRequestBody {
+  username: string;
+  password: string;
+  userIsAdmin?: boolean;
+}
+
+export const register = async (body: AuthRequestBody) => {
   const response = await fetch(`${API_URL}/register`, {
     method: 'POST',
     headers: { 
@@ -14,7 +20,7 @@ export const register = async (body: any) => {
   return data;
 }
 
-export const LogIn = async (body: any) => {
+export const LogIn = async (body: AuthRequestBody) => {
   const response = await fetch(`${API_URL}/log-in`, {
     method: 'POST',
     headers: { 

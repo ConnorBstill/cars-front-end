@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { createCar, getUserCars, deleteCar, updateCar } from '../../ApiServices/CarService';
+import { getUser } from '../../ApiServices/UserService';
 
 import Navbar from '../../components/Navbar/Navbar';
 
@@ -16,9 +17,16 @@ const HomePage = () => {
   const [currentModelEditing, setCurrentModelEditing] = useState('');
   const [currentYearEditing, setCurrentYearEditing] = useState('');
 
+  const [userIsAdmin, setUserIsAdmin] = useState(0);
+
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
+    const user = getUser();
+    console.log(user)
+
+    setUserIsAdmin(user.userIsAdmin);
+
     fetchCars();
   }, []);
 
@@ -121,6 +129,8 @@ const HomePage = () => {
       <Navbar />
 
       <div className='content-container'>
+        {userIsAdmin ? <p>You are a admin!</p> : <></>}
+
         <div>
           <label htmlFor='new-car-make-input'>Make:</label>
           <input 

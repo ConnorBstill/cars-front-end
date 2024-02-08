@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 import { LogIn } from '../../ApiServices/AuthService';
+import { setUser } from '../../ApiServices/UserService';
 
 import './LoginPage.css';
 
@@ -21,8 +22,8 @@ const LoginPage = () => {
 
   const handleLoginClick = async () => {
     const { jwt, success } = await LogIn({ username, password });
-
     if (success) {
+      setUser(jwt);
       localStorage.setItem('car-app-jwt', jwt);
       navigate('/home');
     } else {

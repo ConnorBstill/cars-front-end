@@ -15,3 +15,7 @@
 .username-input, .password-input, .register-button {
   margin-bottom: 20px;
 }
+
+.checkbox-container {
+  margin-bottom: 20px;
+}
