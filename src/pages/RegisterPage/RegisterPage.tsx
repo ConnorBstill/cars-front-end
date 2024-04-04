@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 
 import { register } from '../../ApiServices/AuthService';
 import { setUser } from '../../ApiServices/UserService';
+import { setJwt } from '../../ApiServices/JwtService';
 
 import './RegisterPage.css';
 
@@ -25,7 +26,7 @@ const RegisterPage = () => {
     const { jwt, success } = await register({ username, password, userIsAdmin });
 
     if (success) {
-      localStorage.setItem('car-app-jwt', jwt);
+      setJwt(jwt);
       setUser(jwt);
       navigate('/home');
     } else {

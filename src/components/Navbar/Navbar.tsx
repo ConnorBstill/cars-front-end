@@ -9,7 +9,7 @@ const Navbar = () => {
 
   const logOut = () => {
     removeJwt();
-    navigate('/login')
+    navigate('/login');
   }
 
   return (
